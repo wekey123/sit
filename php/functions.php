@@ -14,6 +14,7 @@ function login($val,$conn){
 					$_SESSION['exp'] = $check['exp'];
 					$_SESSION['sex'] = $check['sex'];
 					$_SESSION['pwd'] = $check['dob'];
+					$_SESSION['type'] = $check['type'];
 					if($check['type']=='Staff')
 					header("location: odviewstaff.php");
 					else{
@@ -27,8 +28,6 @@ function login($val,$conn){
 			header("location: support.php");
 	}
 }
-
-
 
 function reArrayFiles(&$file_post) {
 
@@ -50,4 +49,18 @@ function reArrayFiles(&$file_post) {
 	}
  }
 
+function addstaff($val,$conn){
+	@extract($val);
+	$check=mysqli_fetch_array(mysqli_query($conn,"select * from staffreg where staff_id='$staff_id' and status='Staff'"));
+	if(empty($check)){//echo '<pre>';print_r($conn);exit;
+		$createby = $_SESSION['id'];
+		 $sql="INSERT INTO staffreg(staff_id,name,qua,exp,dob,sex,mailid,contactno,location,type) 
+  VALUES ('$staff_id','$name','$qua','$exp' ,'$dob' ,'$sex' ,'$mailid' ,'$contactno' ,'$location','Staff' )";
+		$result = mysqli_query($conn,$sql);
+		header("location: reg.php");
+		exit;
+	}
+	else	
+	header("location: reg.php");
+}
 ?>

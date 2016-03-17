@@ -27,4 +27,27 @@ function login($val,$conn){
 			header("location: support.php");
 	}
 }
+
+
+
+function reArrayFiles(&$file_post) {
+
+    $file_ary = array();
+    $file_count = count($file_post['name']);
+    $file_keys = array_keys($file_post);
+    for ($i=0; $i<$file_count; $i++) {
+        foreach ($file_keys as $key) {
+            $file_ary[$i][$key] = $file_post[$key][$i];
+        }
+    }
+
+    return $file_ary;
+}
+
+ function checkSession($params = null){
+	 if(empty($_SESSION['name']) &&  empty($_SESSION['pwd'])){
+		header('location:logout.php'); exit;
+	}
+ }
+
 ?>

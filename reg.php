@@ -1,4 +1,6 @@
-<?php require_once("php/db.php");
+<?php 
+require_once("php/db.php");
+checkSession();
 if(isset($_POST['addstaff'])){
 	@extract($_POST);
 	addstaff($_POST,$conn);
@@ -58,7 +60,7 @@ if(isset($_POST['addstaff'])){
               <label>              </label>
               </span>              <label><div align="center"><span class="style15">STAFF ID</span></div>
               </label>            </td>
-            <td width="307"><div align="center">
+            <td width="307"><div align="center"><?php if(isset($_GET['error']) && $_GET['error'] == 1){ echo "<p style='color:red;'> STAFF ID ALREADY EXISTS </p>"; }else if(isset($_GET['error']) && $_GET['error'] == 2){ echo "<p style='color:red;'> Unable to register </p>"; }  ?>
             </div>              
               <span class="style15">
               <label>              </label>

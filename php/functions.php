@@ -3,7 +3,7 @@ function login($val,$conn){
 	$email = $val['sid'];
 	$pwd = $val['pwd'];
 	if(isset($email) &&  isset($pwd)){
-		$query = "SELECT * FROM staffreg WHERE mailid='$email'";
+		$query = "SELECT * FROM staffreg WHERE staff_id='$email'";
 		$result = $conn->query($query);
 		$check = $result->fetch_array(MYSQLI_ASSOC);
 		if(!empty($check)){
@@ -14,6 +14,7 @@ function login($val,$conn){
 					$_SESSION['exp'] = $check['exp'];
 					$_SESSION['sex'] = $check['sex'];
 					$_SESSION['pwd'] = $check['dob'];
+					$_SESSION['id'] = $check['id'];
 					$_SESSION['type'] = $check['type'];
 					if($check['type']=='Staff')
 					header("location: odviewstaff.php");
@@ -51,28 +52,32 @@ function reArrayFiles(&$file_post) {
 
 function addstaff($val,$conn){
 	@extract($val);
-	$check=mysqli_fetch_array(mysqli_query($conn,"select * from staffreg where staff_id='$staff_id' and status='Staff'"));
-	if(empty($check)){//echo '<pre>';print_r($conn);exit;
-		$createby = $_SESSION['id'];
-		 $sql="INSERT INTO staffreg(staff_id,name,qua,exp,dob,sex,mailid,contactno,location,type) 
-  VALUES ('$staff_id','$name','$qua','$exp' ,'$dob' ,'$sex' ,'$mailid' ,'$contactno' ,'$location','Staff' )";
-		$result = mysqli_query($conn,$sql);
-		header("location: reg.php");
+	$query = mysqli_query($conn,"select * from staffreg where staff_id='$staff_id' and type='Staff'");
+	if(mysqli_num_rows($query) > 0){
+		header("location: reg.php?error=1"); // already exists
 		exit;
+	}else{
+		$sql1="INSERT INTO staffreg(name,qua,exp,dob,sex,mailid,contactno,location,type,staff_id)  VALUES ('$sname','$qua','$exp','$dob','$sex','$mailid','$contactno','$location','Staff','$staff_id')";
+		if ($conn->query($sql1) === TRUE) {
+		 header("location: regview.php?success=1");
+		 exit;
+		}else{
+		 header("location: reg.php?error=2"); // insert Failed 
+		 exit;
+		}
 	}
-	else	
-	header("location: reg.php");
 }
 
-function addevent($val,$conn){
+function addevent($val,$conn,$staff_id){
 		@extract($val);
-		$staff_id = $_SESSION['id'];
-		//echo '<pre>';print_r($conn);
-		 $sql="INSERT INTO odform(staff_id,sname,des,clg,start,end,dur,topic,cate,topic,location,status) 
-  VALUES ('$staff_id','$sname','$des','$clg' ,'$start' ,'$end' ,'$dur' ,'$topic' ,'$cat','$top','$location',1 )";
-		$result = mysqli_query($conn,$sql);
-		//print_r($result);exit;
-		header("location: odviewstaff.php");
-		exit;
+		  $sql="INSERT INTO odform(staff_id,sname,des,cate,start,end,dur,topic,clg,loc,status) VALUES ('$staff_id','$sname','$des','$cat','$start','$end','$dur','$top','$clg','$location',1)";
+		if ($conn->query($sql) === TRUE) {
+			header("location: odviewstaff.php?success=1");
+			exit;
+		}else{
+			echo $conn->error; exit;
+		    header("location: apply.php?error=1"); // insert Failed 
+		    exit;
+		}
 }
 ?>

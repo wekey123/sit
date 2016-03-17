@@ -1,9 +1,9 @@
 <?php
 require_once("php/db.php");
-
+echo $_SESSION['id'];
 if(isset($_POST['Submit'])){
 	@extract($_POST);
-	addevent($_POST,$conn);
+	addevent($_POST,$conn,$_SESSION['id']);
 }
 
 ?>

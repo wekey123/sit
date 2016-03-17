@@ -4,8 +4,7 @@ if(isset($_POST['login'])){
 	$email = $_POST['sid'];
 	$password = $_POST['pwd'];
 	login($_POST , $conn);
-}
-else{
+}else{
 	$email = '';
 	$password = '';
 }

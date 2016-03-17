@@ -94,16 +94,9 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	<th>&nbsp;&nbsp;&nbsp;ACTION&nbsp;&nbsp;&nbsp;</th>
 	
 	</tr> ";
-$con=new mysqli($servername,$username,$password,$dbname);
-
-
-  if($con->connect_error){
-    die("connection failed:".$con->connect_error);
-	}
-	$result=mysqli_query($con,"select *from odform");
+	$result=mysqli_query($conn,"select *from odform");
 	$i=1;
 	while($row= mysqli_fetch_array($result))
-	
 	 {
 	  echo "<tr>";
 	   echo"<td>".$i."</td>"; 
@@ -116,10 +109,15 @@ $con=new mysqli($servername,$username,$password,$dbname);
 	   echo"<td>".$row['topic']."</td>";
 	   echo"<td>".$row['clg']."</td>";
 	   echo"<td>".$row['loc']."</td>";
+	   $eventid = $row['id'];
 	   if($row['status'] == 2)
 	   echo"<td>Approved</td>";
 	   else if($row['status'] == 1)
-	   echo"<td><button class='approval button1' rel='2' rel2='".$row['id']."'>Ok</button><button class='approval button2' rel='3' rel2='".$row['id']."'>Cancel</button></td>";
+	   echo"<td><button class='approval button2' rel='2' rel2='".$row['id']."'>Approval</button><button class='approval button1' rel='3' rel2='".$row['id']."'>Cancel</button></td>";
+	   else if($row['status'] == 3)
+	   echo"<td>Cancelled</td>";
+	   else if($row['status'] == 4)
+	   echo"<td><a href='uploadview.php'>Click to mail</a></td>";
 	   else
 	   echo"<td>Cancelled</td>";
 	$i++;  
@@ -137,13 +135,8 @@ $con=new mysqli($servername,$username,$password,$dbname);
       <div class="clr"></div>
     </div>
   </div>
-  <div class="footer">
-    <div class="footer_resize">
-      <p class="lf">Copyright &copy; <a href="#">Domain Name</a>. All Rights Reserved</p>
-      <p class="rf">Design by <a target="_blank" href="http://www.dreamtemplate.com/">DreamTemplate</a></p>
-      <div style="clear:both;"></div>
-    </div>
-  </div>
+  <?php include 'elements/footer.php'; ?>
+</div>
 </div>
 <script>
 $( ".approval" ).click(function() {

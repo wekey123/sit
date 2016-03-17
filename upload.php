@@ -4,12 +4,21 @@ include("php/db.php");
 //without session  redirect to logout.php
 checkSession();
 if(!empty($_POST['submit'])){
+
 	$file_ary = reArrayFiles($_FILES['filesToUpload']);
 	$flag = 1;
 	$a="'".$_POST['title']."'";
     $b="'".$_POST['description']."'";
 	$c=$_POST['staffid'];
     $d=$_POST['eventid'];
+
+	$query1 = "UPDATE odform Set status = 4 WHERE id=$d";
+	if ($conn->query($query1) !== TRUE) {
+		header('location:upload.php?eventid='.$_GET['eventid']);
+		exit;
+	}
+	
+	
     foreach ($file_ary as $file) {
 		if(move_uploaded_file($file['tmp_name'],'upload/'.$file['name'])){
 			$flag = 1;
@@ -26,7 +35,7 @@ if(!empty($_POST['submit'])){
 		}
     }
 	if($flag == 1) echo "Upload Successfully"; else echo "Upload Failure";
-	$conn->close();
+	header('location:uploadview.php');
 }else{
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

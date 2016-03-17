@@ -80,16 +80,9 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	<th>&nbsp;&nbsp;&nbsp;TOPIC&nbsp;&nbsp;&nbsp;</th>
 	<th>&nbsp;&nbsp;&nbsp;COLLEGE NAME&nbsp;&nbsp;&nbsp;</th>
 	<th>&nbsp;&nbsp;&nbsp;LOCATION&nbsp;&nbsp;&nbsp;</th>
-	<th>&nbsp;&nbsp;&nbsp;STATUSnbsp;&nbsp;&nbsp;</th>
+	<th>&nbsp;&nbsp;&nbsp;STATUS&nbsp;&nbsp;&nbsp;</th>
 	</tr> ";
-$con=new mysqli($servername,$username,$password,$dbname);
-
-
-  if($con->connect_error){
-    die("connection failed:".$con->connect_error);
-	}
-	$result=mysqli_query($con,"select *from odform");
-	$i=1;
+$i =1;
 	while($row= mysqli_fetch_array($result))
 	
 	 {
@@ -104,10 +97,15 @@ $con=new mysqli($servername,$username,$password,$dbname);
 	   echo"<td>".$row['topic']."</td>";
 	   echo"<td>".$row['clg']."</td>";
 	   echo"<td>".$row['loc']."</td>";
+	   $eventid = $row['id'];
 	   if($row['status'] == 2)
-	   echo"<td>Approved</td>";
+	   echo"<td>Approved <a href='upload.php?eventid=$eventid'>Upload</a></td>";
 	   else if($row['status'] == 1)
 	   echo"<td>Waiting for Approval</td>";
+	   else if($row['status'] == 3)
+	   echo"<td>Cancelled</td>";
+	   else if($row['status'] == 4)
+	   echo"<td>Completed</td>";
 	   else
 	   echo"<td>Cancelled</td>";
 	$i++;  
@@ -125,13 +123,8 @@ $con=new mysqli($servername,$username,$password,$dbname);
       <div class="clr"></div>
     </div>
   </div>
-  <div class="footer">
-    <div class="footer_resize">
-      <p class="lf">Copyright &copy; <a href="#">Domain Name</a>. All Rights Reserved</p>
-      <p class="rf">Design by <a target="_blank" href="http://www.dreamtemplate.com/">DreamTemplate</a></p>
-      <div style="clear:both;"></div>
-    </div>
-  </div>
+  <?php include 'elements/footer.php'; ?>
+</div>
 </div>
 <script>
 $( ".approval" ).click(function() {

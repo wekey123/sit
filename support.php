@@ -1,7 +1,5 @@
-<?php include 'php/db.php'; 
-if(isset($_SESSION['name']) &&  isset($_SESSION['pwd'])){echo 'df';exit;
-	header("location: val.php");
-}
+<?php 
+include 'php/db.php'; 
 if(isset($_POST['login'])){
 	$email = $_POST['sid'];
 	$password = $_POST['pwd'];

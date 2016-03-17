@@ -15,7 +15,7 @@ if(isset($_POST['status'])){
 }
 else{
 if(isset($_SESSION['name']) &&  isset($_SESSION['pwd'])){
-$query = "select * from odform";
+$query = "select * from odform WHERE staff_id = ".$_SESSION['id'];
 $result = mysqli_query($conn, $query);
 }
 else{
@@ -67,7 +67,7 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	<th>&nbsp;&nbsp;&nbsp;TOPIC&nbsp;&nbsp;&nbsp;</th>
 	<th>&nbsp;&nbsp;&nbsp;COLLEGE NAME&nbsp;&nbsp;&nbsp;</th>
 	<th>&nbsp;&nbsp;&nbsp;LOCATION&nbsp;&nbsp;&nbsp;</th>
-	
+	<th>&nbsp;&nbsp;&nbsp;STATUSnbsp;&nbsp;&nbsp;</th>
 	</tr> ";
 $con=new mysqli($servername,$username,$password,$dbname);
 
@@ -94,7 +94,7 @@ $con=new mysqli($servername,$username,$password,$dbname);
 	   if($row['status'] == 2)
 	   echo"<td>Approved</td>";
 	   else if($row['status'] == 1)
-	   echo"<td><button class='approval' rel='2' rel2='".$row['id']."'>Ok</button><button class='approval' rel='3' rel2='".$row['id']."'>Cancel</button></td>";
+	   echo"<td>Waiting for Approval</td>";
 	   else
 	   echo"<td>Cancelled</td>";
 	$i++;  

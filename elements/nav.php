@@ -6,5 +6,8 @@
           <li <?php if(strpos($_SERVER['REQUEST_URI'],'about')  !== false){  echo "class='active'"; }else{ }  ?>><a href="about.php"><span>About Us</span></a></li>
           <li <?php if(strpos($_SERVER['REQUEST_URI'],'blog')  !== false){  echo "class='active'"; }else{ }  ?>><a href="blog.php"><span>Blog</span></a></li>
           <li <?php if(strpos($_SERVER['REQUEST_URI'],'contact')  !== false){ echo  "class='active'"; }else{ }  ?>><a href="contact.php"><span>Contact Us</span></a></li>
+          <?php if(isset($_SESSION['name']) &&  isset($_SESSION['pwd'])){?>
+          <li><a href="logout.php"><span>Log Out</span></a></li>
+          <?php } ?>
         </ul>
 </div>

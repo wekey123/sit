@@ -1,3 +1,17 @@
+<?php include 'php/db.php'; 
+if(isset($_SESSION['name']) &&  isset($_SESSION['pwd'])){echo 'df';exit;
+	header("location: val.php");
+}
+if(isset($_POST['login'])){
+	$email = $_POST['sid'];
+	$password = $_POST['pwd'];
+	login($_POST , $conn);
+}
+else{
+	$email = '';
+	$password = '';
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -28,7 +42,7 @@
   <div class="content">
     <div class="content_resize">
        <?php include 'elements/sidebar.php'; ?>
-	  <form  action="val.php" method="post">
+	  <form  action="" method="post">
           <div class="mainbar">
             <table width="607" height="355" bgcolor="#000000">
               <tr>
@@ -53,7 +67,7 @@
                 <td><input type="password" name="pwd" /></td>
               </tr>
               <tr>
-                <td></td><td><input name="Submit" type="submit" id="Submit" value="SIGN IN" />  </td>
+                <td></td><td><input type="submit" id="loginsub" name="login" value="Log In"> </td>
               </tr>
             </table>
           </div>

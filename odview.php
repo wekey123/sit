@@ -1,16 +1,28 @@
+<?php
+require_once("php/db.php");
+
+if(isset($_POST['status'])){
+	echo '<pre>';print_r($_POST);exit;
+	$email = $_POST['sid'];
+	$password = $_POST['pwd'];
+	login($_POST , $conn);
+}
+else{
+if(isset($_SESSION['name']) &&  isset($_SESSION['pwd'])){
+$query = "select * from odform";
+$result = mysqli_query($conn, $query);
+}
+else{
+header('location:logout.php');
+}
+}
+ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="css/coin-slider.css" />
-<script type="text/javascript" src="js/cufon-yui.js"></script>
-<script type="text/javascript" src="js/cufon-georgia.js"></script>
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/coin-slider.min.js"></script>
+<title>SIT-OD-View</title>
+<?php include 'elements/header_includes.php'; ?>
 <style type="text/css">
 <!--
 .style2 {color: #1ca2ce}
@@ -30,65 +42,16 @@
 </head>
 <body>
 <div class="main">
-  <div class="header">
-    <div class="header_resize">
-      <div class="menu_nav">
-        <ul>
-          <li><a href="index.php"><span>Home Page</span></a></li>
-          <li class="active"><a href="support.php">HOD</a></li>
-          <li><a href="reg.php">STAFF REGISTRATION </a></li>
-          <li><a href="blog.php"><span>Blog</span></a></li>
-          <li><a href="contact.php"><span>Contact Us</span></a></li>
-        </ul>
-      </div>
-      <div class="logo">
-        <h1><a href="index.php">SETHU <span class="style2">INSTITUTE OF </span>TECHNOLOGY</a></h1>
-      </div>
-      <div class="clr"></div>
-      <div class="slider">
-        <div id="coin-slider"> <a href="#"><img src="images/slide1.jpg" width="960" height="360" alt="" /></a>
-          <div id="div">
-            <div align="center"><span class="style1">SETHU INSTITUTE OF TECHNOLOGY - BEST COLLEGE IN TAMIL NADU </span> </div>
-            <p align="center"><span class="style1"> &quot;A GATEWAY TO KNOWLEDGE AND SUCCESS&quot; </span></p>
-          </div>
-          <div class="clr"></div>
-        <a href="#"><img src="images/slide3.jpg" width="960" height="360" alt="" /></a>
-        <div id="div2">
-          <div align="center"><span class="style1">SETHU INSTITUTE OF TECHNOLOGY - BEST COLLEGE IN TAMIL NADU </span> </div>
-          <p align="center"><span class="style1"> &quot;A GATEWAY TO KNOWLEDGE AND SUCCESS&quot; </span></p>
-        </div>
-        <div class="clr"></div>
-</div>
-        <div class="clr"></div>
-      </div>
-      <div class="clr"></div>
-    </div>
-  </div>
+  <?php include 'elements/header.php'; ?>  <!--header, nav and slider-->
   <div class="content">
     <div class="content_resize">
-      <div class="sidebar">
-        <div class="searchform"></div>
-        <div class="clr"></div>
-        <div class="gadget">
-          <h2 class="star"><span>Sidebar</span> Menu</h2>
-          <div class="clr"></div>
-          <ul class="sb_menu">
-            <li><a href="#">Home</a></li>
-            <li>About Us </li>
-            <li><a href="#">Log-In</a></li>
-            <li><a href="#">Contact Us </a></li>
-          </ul>
-          <p><img src="images/download.jpg" width="228" height="143" /></p>
-          <p><img src="images/images.jpg" width="226" height="182" /></p>
-        </div>
-      </div>
+      <?php //include 'elements/sidebar.php'; ?>
+      <h2 style=" border-bottom:1px solid #f00">Event List</h2>
 <?php
-$servername="localhost";
-$username="root";
-$password="";
-$dbname="od";
+
 echo"<table border='1' bgcolor='Black' Text Color='red'>
 	<tr>
+	<th> &nbsp;&nbsp;&nbsp;No&nbsp;&nbsp;&nbsp;</th>
 	<th> &nbsp;&nbsp;&nbsp;STAFF NAME&nbsp;&nbsp;&nbsp;</th>
 	<th>&nbsp;&nbsp;&nbsp;DESIGNATION&nbsp;&nbsp;&nbsp;</th>
 	<th>&nbsp;&nbsp;&nbsp;CATEGORY&nbsp;&nbsp;&nbsp;</th>
@@ -107,11 +70,12 @@ $con=new mysqli($servername,$username,$password,$dbname);
     die("connection failed:".$con->connect_error);
 	}
 	$result=mysqli_query($con,"select *from odform");
-	
+	$i=1;
 	while($row= mysqli_fetch_array($result))
 	
 	 {
 	  echo "<tr>";
+	   echo"<td>".$i."</td>"; 
 	  echo"<td>".$row['sname']."</td>"; 
 	   echo"<td>".$row['des']."</td>"; 
        echo"<td>".$row['cate']."</td>"; 
@@ -121,13 +85,17 @@ $con=new mysqli($servername,$username,$password,$dbname);
 	   echo"<td>".$row['topic']."</td>";
 	   echo"<td>".$row['clg']."</td>";
 	   echo"<td>".$row['loc']."</td>";
-	   echo"<td><a href='upload.php?eventid=".$row['id']."'>Link</a></td>";
-	  
+	   echo"<td><button class='approval' rel='2' rel2='".$row['id']."'>Ok</button><button class='approval'  rel='3' rel2='".$row['id']."'>Cancel</button></td>";
+	$i++;  
 }
 	   
 	   echo"</table>";
 	   
 	   ?>
+       <form method="post" action="" id="approvalForm">
+       		<input type="hidden" id="status" name="status" value=""  />
+       		<input type="hidden" id="odid" name="id" value=""  />
+       </form>
 	    <div class="fbg">
     <div class="fbg_resize">
       <div class="clr"></div>
@@ -141,5 +109,12 @@ $con=new mysqli($servername,$username,$password,$dbname);
     </div>
   </div>
 </div>
+<script>
+$( ".approval" ).click(function() {
+	$('#odid').val($(this).attr('rel2'));
+	$('#status').val($(this).attr('rel'));
+  $( "#approvalForm" ).submit();
+});
+</script>
 </body>
 </html>

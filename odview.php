@@ -44,6 +44,30 @@ header('location:logout.php');
 .style6 {color: #FFFFFF}
 .style15 {font-size: 14px; font-family: "Times New Roman", Times, serif; color: #FFFFFF;}
 -->
+
+.button1 {
+    background-color: #f44336; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	margin-bottom:10px;
+}
+
+.button2 {
+    background-color: #008CBA; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+	margin-bottom:10px;
+}
 </style>
 </head>
 <body>
@@ -67,6 +91,7 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	<th>&nbsp;&nbsp;&nbsp;TOPIC&nbsp;&nbsp;&nbsp;</th>
 	<th>&nbsp;&nbsp;&nbsp;COLLEGE NAME&nbsp;&nbsp;&nbsp;</th>
 	<th>&nbsp;&nbsp;&nbsp;LOCATION&nbsp;&nbsp;&nbsp;</th>
+	<th>&nbsp;&nbsp;&nbsp;ACTION&nbsp;&nbsp;&nbsp;</th>
 	
 	</tr> ";
 $con=new mysqli($servername,$username,$password,$dbname);
@@ -94,7 +119,7 @@ $con=new mysqli($servername,$username,$password,$dbname);
 	   if($row['status'] == 2)
 	   echo"<td>Approved</td>";
 	   else if($row['status'] == 1)
-	   echo"<td><button class='approval' rel='2' rel2='".$row['id']."'>Ok</button><button class='approval' rel='3' rel2='".$row['id']."'>Cancel</button></td>";
+	   echo"<td><button class='approval button1' rel='2' rel2='".$row['id']."'>Ok</button><button class='approval button2' rel='3' rel2='".$row['id']."'>Cancel</button></td>";
 	   else
 	   echo"<td>Cancelled</td>";
 	$i++;  

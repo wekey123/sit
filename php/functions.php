@@ -63,4 +63,16 @@ function addstaff($val,$conn){
 	else	
 	header("location: reg.php");
 }
+
+function addevent($val,$conn){
+		@extract($val);
+		$staff_id = $_SESSION['id'];
+		//echo '<pre>';print_r($conn);
+		 $sql="INSERT INTO odform(staff_id,sname,des,clg,start,end,dur,topic,cate,topic,location,status) 
+  VALUES ('$staff_id','$sname','$des','$clg' ,'$start' ,'$end' ,'$dur' ,'$topic' ,'$cat','$top','$location',1 )";
+		$result = mysqli_query($conn,$sql);
+		//print_r($result);exit;
+		header("location: odviewstaff.php");
+		exit;
+}
 ?>

@@ -44,15 +44,28 @@ header('location:logout.php');
 .style6 {color: #FFFFFF}
 .style15 {font-size: 14px; font-family: "Times New Roman", Times, serif; color: #FFFFFF;}
 -->
+.button {
+    background-color: #f44336; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	margin-bottom:10px;
+}
 </style>
 </head>
 <body>
 <div class="main">
   <?php include 'elements/header.php'; ?>  <!--header, nav and slider-->
+  
   <div class="content">
     <div class="content_resize">
       <?php //include 'elements/sidebar.php'; ?>
       <h2 style=" border-bottom:1px solid #f00">Event List</h2>
+      <a href="apply.php" class="button" style="">Add Event</a>
 <?php
 
 echo"<table border='1' bgcolor='Black' Text Color='red'>

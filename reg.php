@@ -39,7 +39,7 @@ if(isset($_POST['addstaff'])){
           <tr bgcolor="#000000">
             <td height="49" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="style5"><em>
               <strong>
-              <label>              </label>
+              <label><a href="regview.php">Staff List</a>              </label>
               </strong>
               <label></label>
             </em>

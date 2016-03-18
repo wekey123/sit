@@ -23,10 +23,10 @@ function login($val,$conn){
 					}
 			}
 			else	
-				header("location: support.php");		
+				header("location: support.php?error=1");		
 		}
 		else
-			header("location: support.php");
+			header("location: support.php?error=2");
 	}
 }
 

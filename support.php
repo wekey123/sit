@@ -45,7 +45,8 @@ if(isset($_POST['login'])){
               <tr>
                 <td colspan="2" >&nbsp;
                     <label>
-                    <div align="center" class="style5">LOG - IN </div>
+                    <div align="center" class="style5">LOG - IN  <?php if(isset($_GET['error']) && $_GET['error'] == 1){ echo "<p style='color:red;'> Password Incorrect </p>"; }else if(isset($_GET['error']) && $_GET['error'] == 2){ echo "<p style='color:red;'> UserID Incorrect </p>"; }  ?></div>
+                    
                 </label>
                 <label></label>            </td>
                 <td> <label>

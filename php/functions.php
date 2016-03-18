@@ -80,4 +80,18 @@ function addevent($val,$conn,$staff_id){
 		    exit;
 		}
 }
+
+function sendmail($val,$conn){
+	@extract($val);
+	//echo '<pre>';print_r($val);exit;
+	$to1      = $to;
+	$subject1 = $subject;
+	$message1 = $message;
+	$headers = 'From: mani1498@gmail.com' . "\r\n" .
+    'Reply-To: mani1498@gmail.com' . "\r\n" .
+    'X-Mailer: SIT/HOD';
+	mail($to1, $subject1, $message1, $headers);
+	header("location: odview.php"); // insert Failed 
+		    exit;
+}
 ?>

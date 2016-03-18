@@ -109,6 +109,12 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	   echo"<td>".$row['topic']."</td>";
 	   echo"<td>".$row['clg']."</td>";
 	   echo"<td>".$row['loc']."</td>";
+	   $query = "SELECT * FROM staffreg WHERE id='". $row['staff_id']."'";
+		$result=mysqli_query($conn,$query);
+		$check = mysqli_fetch_array($result,MYSQLI_ASSOC);
+		if(!empty($check)){
+			$mails=$check['mailid'];
+		}
 	   $eventid = $row['id'];
 	   if($row['status'] == 2)
 	   echo"<td>Approved</td>";
@@ -117,7 +123,8 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	   else if($row['status'] == 3)
 	   echo"<td>Cancelled</td>";
 	   else if($row['status'] == 4)
-	   echo"<td><a href='uploadview.php'>Click to mail</a></td>";
+	  // echo"<td><a href='uploadview.php'>Click to mail</a></td>";
+	   echo"<td><a id='newMail' href='#' rel='".$mails."'>Click to mail</a></td>";
 	   else
 	   echo"<td>Cancelled</td>";
 	$i++;  

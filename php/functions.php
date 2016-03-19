@@ -16,11 +16,7 @@ function login($val,$conn){
 					$_SESSION['pwd'] = $check['dob'];
 					$_SESSION['id'] = $check['id'];
 					$_SESSION['type'] = $check['type'];
-					if($check['type']=='Staff')
-					header("location: odviewstaff.php");
-					else{
-					header("location: odview.php");
-					}
+					header("location: index.php");
 			}
 			else	
 				header("location: support.php?error=1");		

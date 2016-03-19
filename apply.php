@@ -138,7 +138,7 @@ if(isset($_POST['Submit'])){
               <span class="style15"><label>              </label>
               </span>              <label>
                 <div align="center"><span class="style15">
-                  <input type="text" name="start" />
+                  <input type="text" name="start" class="datepicker" />
                 </span> </div>
               </label>              </td>
           </tr>
@@ -154,7 +154,7 @@ if(isset($_POST['Submit'])){
               <span class="style15"><label>              </label>
               </span>              <label>
                 <div align="center"><span class="style15">
-                  <input type="text" name="end" />
+                  <input type="text" name="end" class="datepicker" />
                 </span> </div>
               </label>              </td>
           </tr>

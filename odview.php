@@ -96,7 +96,7 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	</tr> ";
 	$result=mysqli_query($conn,"select *from odform");
 	$i=1;
-	while($row= mysqli_fetch_array($result))
+	while($row= mysqli_fetch_array($result,MYSQLI_ASSOC))
 	 {
 	  echo "<tr>";
 	   echo"<td>".$i."</td>"; 
@@ -108,25 +108,26 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	   echo"<td>".$row['dur']."</td>";
 	   echo"<td>".$row['topic']."</td>";
 	   echo"<td>".$row['clg']."</td>";
-	   echo"<td>".$row['loc']."</td>";
-	   $query = "SELECT * FROM staffreg WHERE id='". $row['staff_id']."'";
-		$result=mysqli_query($conn,$query);
-		$check = mysqli_fetch_array($result,MYSQLI_ASSOC);
-		if(!empty($check)){
-			$mails=$check['mailid'];
-		}
-	   $eventid = $row['id'];
+	   echo"<td rel='".$row['staff_id']."'>".$row['loc']."</td>";
 	   if($row['status'] == 2)
 	   echo"<td>Approved</td>";
 	   else if($row['status'] == 1)
 	   echo"<td><button class='approval button2' rel='2' rel2='".$row['id']."'>Approval</button><button class='approval button1' rel='3' rel2='".$row['id']."'>Cancel</button></td>";
 	   else if($row['status'] == 3)
 	   echo"<td>Cancelled</td>";
-	   else if($row['status'] == 4)
+	   else if($row['status'] == 4){
 	  // echo"<td><a href='uploadview.php'>Click to mail</a></td>";
+	   $query2 = "SELECT * FROM staffreg WHERE id='". $row['staff_id']."'";
+	   $result2=mysqli_query($conn,$query2);
+	   $check2 = mysqli_fetch_assoc($result2);
+		if(!empty($check2)){
+			$mails=$check2['mailid'];
+		}
 	   echo"<td><a id='newMail' href='#' rel='".$mails."'>Click to mail</a></td>";
+	   }
 	   else
 	   echo"<td>Cancelled</td>";
+	   unset($check2);unset($query2);unset($result2);
 	$i++;  
 }
 	   

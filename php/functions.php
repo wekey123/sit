@@ -83,11 +83,13 @@ function sendmail($val,$conn){
 	$to1      = $to;
 	$subject1 = $subject;
 	$message1 = $message;
-	$headers = 'From: mani1498@gmail.com' . "\r\n" .
-    'Reply-To: mani1498@gmail.com' . "\r\n" .
-    'X-Mailer: SIT/HOD';
+	$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'From: SIT<donotreply@jeevanfootwear.in >' . "\r\n";
+	//$headers = 'From: donotreply@jeevanfootwear.in' . "\r\n" .
+    //'Reply-To: mani1498@gmail.com' . "\r\n" .
+    //'X-Mailer: SIT/HOD';
 	mail($to1, $subject1, $message1, $headers);
 	header("location: odview.php"); // insert Failed 
-		    exit;
+	exit;
 }
 ?>

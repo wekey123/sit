@@ -1,10 +1,4 @@
-<?php require_once("php/db.php");
-if(isset($_POST['Submit'])){
-	echo '<pre>';print_r($_POST);exit;
-	@extract($_POST);
-	addevent($_POST,$conn);
-}
-?>
+
 <form action="sendmail.php" method="post" >
         <table cellpadding="3" cellspacing="3" border="0" align="center">
            

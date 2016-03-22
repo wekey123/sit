@@ -110,8 +110,8 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	   echo"<td>".$row['clg']."</td>";
 	   echo"<td>".$row['loc']."</td>";
 	   $query = "SELECT * FROM staffreg WHERE id='". $row['staff_id']."'";
-		$result=mysqli_query($conn,$query);
-		$check = mysqli_fetch_array($result,MYSQLI_ASSOC);
+		$staffresult=mysqli_query($conn,$query);
+		$check = mysqli_fetch_array($staffresult,MYSQLI_ASSOC);
 		if(!empty($check)){
 			$mails=$check['mailid'];
 		}

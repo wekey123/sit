@@ -7,7 +7,7 @@
           <?php } else {
 			  $link= $_SESSION['type'] == 'Staff' ? 'odviewstaff.php' : 'odview.php';
 			   ?>
-           <li <?php if(strpos($_SERVER['REQUEST_URI'],'odview')  !== false || strpos($_SERVER['REQUEST_URI'],'apply')  !== false){ echo  "class='active'"; }else{ }  ?>><a href="<?php echo $link; ?>">Events</a></li>
+           <li <?php if(strpos($_SERVER['REQUEST_URI'],'odview')  !== false || strpos($_SERVER['REQUEST_URI'],'apply')  !== false || strpos($_SERVER['REQUEST_URI'],'journalview')  !== false || strpos($_SERVER['REQUEST_URI'],'journalviewstaff')  !== false || strpos($_SERVER['REQUEST_URI'],'jou')  !== false){ echo  "class='active'"; }else{ }  ?>><a href="<?php echo $link; ?>">Events</a></li>
            <?php if($_SESSION['type'] == 'Admin') { ?>
            <li <?php if(strpos($_SERVER['REQUEST_URI'],'reg')  !== false){ echo  "class='active'"; }else{ }  ?>><a href="reg.php">STAFF REGISTRATION </a></li>
            

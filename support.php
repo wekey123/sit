@@ -1,5 +1,12 @@
 <?php 
 include 'php/db.php'; 
+if(!empty($_SESSION)){
+	if($_SESSION['type'] == 'Admin'){
+		header('location:odview.php'); exit;
+	}else{
+		header('location:odviewstaff.php'); exit;
+	}
+}
 if(isset($_POST['login'])){
 	$email = $_POST['sid'];
 	$password = $_POST['pwd'];

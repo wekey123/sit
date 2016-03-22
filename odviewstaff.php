@@ -1,6 +1,9 @@
 <?php
 require_once("php/db.php");
-
+checkSession();
+if($_SESSION['type'] == 'Admin'){
+	header('location:odview.php'); exit;
+}
 if(isset($_POST['status'])){
 	$id = $_POST['id'];
 	$status = $_POST['status'];
@@ -48,7 +51,7 @@ header('location:logout.php');
     background-color: #f44336; /* Green */
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 8px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -64,6 +67,7 @@ header('location:logout.php');
   <div class="content">
     <div class="content_resize">
       <?php //include 'elements/sidebar.php'; ?>
+      <a href="journalviewstaff.php" class="button" style="float:right;">Journal List</a>
       <h2 style=" border-bottom:1px solid #f00">Event List</h2>
       <a href="apply.php" class="button" style="">Add Event</a>
 <?php

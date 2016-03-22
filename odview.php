@@ -1,6 +1,10 @@
 <?php
 require_once("php/db.php");
-
+//without session  redirect to logout.php
+checkSession();
+if($_SESSION['type'] == 'Staff'){
+	header('location:odviewstaff.php'); exit;
+}
 if(isset($_POST['status'])){
 	$id = $_POST['id'];
 	$status = $_POST['status'];
@@ -68,6 +72,18 @@ header('location:logout.php');
     font-size: 12px;
 	margin-bottom:10px;
 }
+
+.button {
+    background-color: #f44336; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	margin-bottom:10px;
+}
 </style>
 </head>
 <body>
@@ -76,6 +92,7 @@ header('location:logout.php');
   <div class="content">
     <div class="content_resize">
       <?php //include 'elements/sidebar.php'; ?>
+      <a href="journalview.php" class="button" style="float:right;">Journal List</a>
       <h2 style=" border-bottom:1px solid #f00">Event List</h2>
 <?php
 

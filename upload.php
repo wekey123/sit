@@ -3,6 +3,9 @@ include("php/db.php");
 
 //without session  redirect to logout.php
 checkSession();
+if($_SESSION['type'] == 'Admin'){
+	header('location:odview.php'); exit;
+}
 if(!empty($_POST['submit'])){
 
 	$file_ary = reArrayFiles($_FILES['filesToUpload']);

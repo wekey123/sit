@@ -1,5 +1,9 @@
 <?php
 require_once("php/db.php");
+checkSession();
+if($_SESSION['type'] == 'Admin'){
+	header('location:odview.php'); exit;
+}
 if(isset($_POST['Submit'])){
 	@extract($_POST);
 	addevent($_POST,$conn,$_SESSION['id']);
@@ -293,13 +297,7 @@ if(isset($_POST['Submit'])){
       <div class="clr"></div>
     </div>
   </div>
-  <div class="footer">
-    <div class="footer_resize">
-      <p class="lf">Copyright &copy; <a href="#">Domain Name</a>. All Rights Reserved</p>
-      <p class="rf">Design by <a target="_blank" href="http://www.dreamtemplate.com/">DreamTemplate</a></p>
-      <div style="clear:both;"></div>
-    </div>
-  </div>
+  <?php include 'elements/footer.php'; ?>
 </div>
 </body>
 </html>

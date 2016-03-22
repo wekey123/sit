@@ -72,6 +72,15 @@ if($_SESSION['type'] == 'Admin'){
   <div class="content">
     <div class="content_resize">
       <?php //include 'elements/sidebar.php'; ?>
+      
+      <?php if(!empty($_GET['errorjou'])){ 
+	  		$errorjou = $_GET['errorjou']; 
+	  if($errorjou == 1){ ?>
+          <span style="font-size:14px; color:red; font-weight:bold;">Journal Form Successfully Added</span><br/>
+	    <?php }else if($errorjou == 2){?>
+         	<span style="font-size:14px; color:red; font-weight:bold;">Journal Form Failed</span><br/>
+       <?php }  } ?>  
+          
       <a href="odviewstaff.php" class="button" style="float:right;">Event List</a>
       <h2 style=" border-bottom:1px solid #f00">Journal List</h2>
       <a href="jou.php" class="button" >Add Journal</a>

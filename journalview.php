@@ -2,7 +2,9 @@
 include("php/db.php");
 //without session  redirect to logout.php
 checkSession();
-
+if($_SESSION['type'] == 'Staff'){
+	header('location:odviewstaff.php'); exit;
+}
  ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -69,7 +71,9 @@ checkSession();
   <div class="content">
     <div class="content_resize">
       <?php //include 'elements/sidebar.php'; ?>
-      <a href="odview.php" class="button" style="float:right;">Event List</a>
+      <a href="uploadview.php" class="button" style="float:right;">Download List</a>
+      <a href="odview.php" class="button" style="float:right;   margin-right: 20px;">Event List</a>
+      
       <h2 style=" border-bottom:1px solid #f00">Journal List</h2>
 <?php
 

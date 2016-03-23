@@ -92,7 +92,9 @@ header('location:logout.php');
   <div class="content">
     <div class="content_resize">
       <?php //include 'elements/sidebar.php'; ?>
-      <a href="journalview.php" class="button" style="float:right;">Journal List</a>
+    
+     <a href="uploadview.php" class="button" style="float:right;">Download List</a> 
+      <a href="journalview.php" class="button" style="float:right;  margin-right: 20px;">Journal List</a>
       <h2 style=" border-bottom:1px solid #f00">Event List</h2>
 <?php
 

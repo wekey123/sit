@@ -45,7 +45,13 @@ if($_SESSION['type'] == 'Staff'){
   <?php include 'elements/header.php'; ?>  <!--header, nav and slider-->
 	<div class="content">
     <div class="content_resize">
-    <a href="journalview.php" class="button" style="float:right;">Journal List</a><a href="odview.php" class="button" style="float:right; margin-right: 20px;">Event List</a> 
+
+      <a href="confview.php" class="button" style="float:right;">Conference List</a>
+      <a href="journalview.php" class="button" style="float:right;  margin-right: 20px;">Journal List</a>
+      <a href="odview.php" class="button" style="float:right; margin-right: 20px;">Event List</a>
+    
+    
+     
     <h2 style=" border-bottom:1px solid #f00">Download List</h2>
     <table border='1' bgcolor='Black' Text Color='red' width="100%">
     <tr><th>Sno</th><th>Topic</th><th>Staff Name</th><th>College</th><th>Location</th><th>Dowload</th></tr>
@@ -61,8 +67,9 @@ if($_SESSION['type'] == 'Staff'){
         <td><?php echo $row['sname']; ?></td>
         <td><?php echo $row['clg']; ?></td>
         <td><?php echo $row['location']; ?></td>
-      	 <?php  if (file_exists($filename)) { ?>
-  		 <td><a href="upload/<?php echo $row['filename']; ?>">download</a></td>
+      	 <?php  $filename = 'upload/'.$row['filename'];
+		 			if (file_exists($filename)) { ?>
+  		 <td><a href="<?php echo $filename; ?>">download</a></td>
          <?php  } else { ?>
          <td> NA </td>
         <?php } ?>

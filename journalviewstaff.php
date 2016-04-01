@@ -81,8 +81,11 @@ if($_SESSION['type'] == 'Admin'){
          	<span style="font-size:14px; color:red; font-weight:bold;">Journal Form Failed</span><br/>
        <?php }  } ?>  
           
-      <a href="odviewstaff.php" class="button" style="float:right;">Event List</a>
-      <h2 style=" border-bottom:1px solid #f00">Journal List</h2>
+
+      <a href="confviewstaff.php" class="button" style="float:right;">Conference List</a>    
+      <a href="odviewstaff.php"  class="button" style="float:right;margin-right:15px;">Event List</a>
+      
+      <h2 style=" border-bottom:1px solid #f00">Journal Staff List</h2>
       <a href="jou.php" class="button" >Add Journal</a>
 <?php
 

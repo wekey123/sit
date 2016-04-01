@@ -67,7 +67,10 @@ header('location:logout.php');
   <div class="content">
     <div class="content_resize">
       <?php //include 'elements/sidebar.php'; ?>
-      <a href="journalviewstaff.php" class="button" style="float:right;">Journal List</a>
+     
+      
+       <a href="confviewstaff.php" class="button" style="float:right;">Conference List</a>    
+       <a href="journalviewstaff.php" class="button" style="float:right; margin-right:15px">Journal List</a>
       <h2 style=" border-bottom:1px solid #f00">Event List</h2>
       <a href="apply.php" class="button" style="">Add Event</a>
 <?php

@@ -19,8 +19,8 @@ if(isset($_POST['status'])){
 }
 else{
 if(isset($_SESSION['name']) &&  isset($_SESSION['pwd'])){
-$query = "select * from odform";
-$result = mysqli_query($conn, $query);
+$query = "select * from odform GROUP BY sname ORDER BY id";
+$group = mysqli_query($conn, $query);
 }
 else{
 header('location:logout.php');
@@ -92,10 +92,28 @@ header('location:logout.php');
   <div class="content">
     <div class="content_resize">
       <?php //include 'elements/sidebar.php'; ?>
-    
-     <a href="uploadview.php" class="button" style="float:right;">Download List</a> 
+
+      <a href="uploadview.php" class="button" style="float:right;">Download List</a>
+      <a href="confview.php" class="button" style="float:right; margin-right: 20px;">Conference List</a>
       <a href="journalview.php" class="button" style="float:right;  margin-right: 20px;">Journal List</a>
+      
       <h2 style=" border-bottom:1px solid #f00">Event List</h2>
+      
+      <form method="post" action="odview.php?search=1" id="approvalForm">
+       <select  name="staff">
+        	<?php 
+				 while($groupbyname= mysqli_fetch_array($group))
+				 {
+			?>
+        	<option value="<?php echo $groupbyname['staff_id']; ?>"><?php echo $groupbyname['sname']; ?></option>
+            <?php } ?>
+       </select>
+       <input type="text" name="from" id="datepicker1"/>
+       <input type="text" name="to"  id="datepicker2"/>
+       <input type="submit" name="go" value="GO" />
+      </form>
+      
+
 <?php
 
 echo"<table border='1' bgcolor='Black' Text Color='red'>
@@ -113,10 +131,25 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 	<th>&nbsp;&nbsp;&nbsp;ACTION&nbsp;&nbsp;&nbsp;</th>
 	
 	</tr> ";
+	
+	if(isset($_GET['search'])){
+		
+		if(isset($_POST['go'])){
+			//echo "<pre>"; print_r($_POST); exit;
+			$staffid = $_POST['staff'];
+			$from = $_POST['from'];
+			$to = $_POST['to'];
+		}
+	$result= array();	
+	$result=mysqli_query($conn,"select *from odform where id = $staffid and start >= '$from' and end <= '$to'");
+	}else{
 	$result=mysqli_query($conn,"select *from odform");
+	}
+	
 	$i=1;
 	while($row= mysqli_fetch_array($result))
 	 {
+		 
 	  echo "<tr>";
 	   echo"<td>".$i."</td>"; 
 	  echo"<td>".$row['sname']."</td>"; 
@@ -150,12 +183,14 @@ echo"<table border='1' bgcolor='Black' Text Color='red'>
 }
 	   
 	   echo"</table>";
-	   
-	   ?>
+
+ ?>
        <form method="post" action="" id="approvalForm">
        		<input type="hidden" id="status" name="status" value=""  />
        		<input type="hidden" id="odid" name="id" value=""  />
        </form>
+       
+       
 	    <div class="fbg">
     <div class="fbg_resize">
       <div class="clr"></div>
